@@ -33,7 +33,8 @@ jobs:
           pwd
           ls -l /home/runner/work/testcontainers-ci-cd/
           ls -l /home/runner/work/testcontainers-ci-cd/testcontainers-ci-cd/
-          ls -l ${{ github.workspace }}/docker_compose/
+          ls -l /home/runner/work/
+#          ls -l ${{ github.workspace }}/docker_compose/
 
 #      - name: Start application-specific services using Docker Compose
 #        run: docker-compose -f ./docker_compose/docker-compose.yml up -d
