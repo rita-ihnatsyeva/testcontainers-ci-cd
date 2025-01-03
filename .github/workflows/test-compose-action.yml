@@ -27,7 +27,11 @@ jobs:
 #        run: npm install
 #        continue-on-error: false
 
+      - name: check files in home dir
+        run: |
+          ls -l
+          pwd
 
-      - name: Start application-specific services using Docker Compose
-        run: docker-compose -f ./docker_compose/docker-compose.yml up -d
-        continue-on-error: false
+#      - name: Start application-specific services using Docker Compose
+#        run: docker-compose -f ./docker_compose/docker-compose.yml up -d
+#        continue-on-error: false
