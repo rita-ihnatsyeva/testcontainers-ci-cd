@@ -29,5 +29,5 @@ jobs:
 
 
       - name: Start application-specific services using Docker Compose
-        run: docker-compose -f /docker_compose/docker-compose.yml up -d
+        run: docker-compose -f ./docker_compose/docker-compose.yml up -d
         continue-on-error: false
