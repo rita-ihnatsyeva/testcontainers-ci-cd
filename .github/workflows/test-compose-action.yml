@@ -32,6 +32,7 @@ jobs:
           ls -l
           pwd
           ls -d /home/runner/work/testcontainers-ci-cd
+          ls -d /home/runner/work/testcontainers-ci-cd/testcontainers-ci-cd
 
 #      - name: Start application-specific services using Docker Compose
 #        run: docker-compose -f ./docker_compose/docker-compose.yml up -d
