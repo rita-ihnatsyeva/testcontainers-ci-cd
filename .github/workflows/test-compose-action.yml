@@ -5,14 +5,19 @@ on:
       - develop # or any branch you want to trigger the publish
 
 jobs:
-  build-and-publish:
+  run-tests:
     runs-on: ubuntu-latest
-
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
         continue-on-error: false
+
+      - name: Install python dependencies
+        run: |
+          apt-get update && apt-get install python3 -y
+          sudo apt install python3-pip -y
+          pip install -r ${{ github.workspace }}/requirements.txt
 
       - name: Install Docker using Docker's official script
         run: |
@@ -26,12 +31,16 @@ jobs:
           sudo chmod +x /usr/local/bin/docker-compose
           docker-compose --version
         continue-on-error: false
+#
+#      - name: Start application-specific services using Docker Compose
+#        run: docker-compose -f ${{ github.workspace }}/docker_compose/docker-compose.yml up
+#        continue-on-error: false
+#        timeout-minutes: 5
 
-      - name: Start application-specific services using Docker Compose
-        run: docker-compose -f ${{ github.workspace }}/docker_compose/docker-compose.yml up
-        continue-on-error: false
-        timeout-minutes: 5
+      - name: Run integration test Spark-Nessie-Iceberg
+        run: |
+          pytest ${{ github.workspace }}/tests/spark_integr_test.py
 
-      - name: Stop docker compose
-        run: docker-compose -f ${{ github.workspace }}/docker_compose/docker-compose.yml down
-        continue-on-error: false
+#      - name: Stop docker compose
+#        run: docker-compose -f ${{ github.workspace }}/docker_compose/docker-compose.yml down
+#        continue-on-error: false

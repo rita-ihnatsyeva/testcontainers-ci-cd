@@ -37,7 +37,7 @@ services:
       - ./spark_entrypoint.sh:/scripts/spark_entrypoint.sh
     user: root
     # user id 1001
-    entrypoint: ['/scripts/spark_entrypoint.sh']
+#    entrypoint: ['/scripts/spark_entrypoint.sh']
   nessie:
     image: ghcr.io/projectnessie/nessie:0.95.0
     container_name: nessie

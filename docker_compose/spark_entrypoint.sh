@@ -8,4 +8,4 @@ pip install pyspark;
 
 echo "start check spark";
 
-python check_spark.py;
+#python check_spark.py;

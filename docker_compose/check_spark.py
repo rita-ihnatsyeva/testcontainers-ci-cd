@@ -26,7 +26,7 @@ spark = init_spark()
 # read csv from minio bucket
 df = spark.read.options(delimiter=";", header=True).csv('s3a://landing/resources/test_csv.csv')
 
-print(df.show())
+logging.info(df.show())
 
 spark.sql("use nessie")
 
