@@ -30,3 +30,8 @@ jobs:
       - name: Start application-specific services using Docker Compose
         run: docker-compose -f ${{ github.workspace }}/docker_compose/docker-compose.yml up
         continue-on-error: false
+        timeout-minutes: 5
+
+      - name: Stop docker compose
+        run: docker-compose -f ${{ github.workspace }}/docker_compose/docker-compose.yml down
+        continue-on-error: false
