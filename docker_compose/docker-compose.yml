@@ -1,0 +1,45 @@
+version: "3"
+services:
+  minio:
+    image: bitnami/minio:2024.6.4-debian-12-r0
+    ports:
+      - 9000:9000
+      - 9001:9001
+    env_file:
+      - 'spark_minio_nessie.env'
+    container_name: minio
+#    command: server /data --console-address ":9001"
+  createbuckets:
+    image: minio/mc
+    depends_on:
+      - minio
+    env_file:
+      - 'spark_minio_nessie.env'
+    volumes:
+      - ./resources/test_csv.csv:/resources/test_csv.csv
+      - ./create_bucket_entrypoint.sh:/resources/create_bucket_entrypoint.sh
+    # create target bucket and "landing" bucket with input csvs
+    # add sleep command here so minio is fully ready
+    entrypoint: ['resources/create_bucket_entrypoint.sh']
+  spark:
+    depends_on:
+      - createbuckets
+    image: bitnami/spark:3.5.0-debian-12-r18
+#    build: .
+    container_name: spark
+    env_file:
+      - 'spark_minio_nessie.env'
+    volumes:
+      - ./check_spark.py:/scripts/check_spark.py
+      - ./init_spark_session.py:/scripts/init_spark_session.py
+      - ./spark_entrypoint.sh:/scripts/spark_entrypoint.sh
+    user: root
+    # user id 1001
+    entrypoint: ['/scripts/spark_entrypoint.sh']
+  nessie:
+    image: ghcr.io/projectnessie/nessie:0.95.0
+    container_name: nessie
+    env_file:
+      - 'spark_minio_nessie.env'
+    ports:
+      - 19120:19120
