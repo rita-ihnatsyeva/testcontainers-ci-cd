@@ -22,5 +22,7 @@ For the local run:
   pytest ./tests/spark_integr_test.py
   ```
 
+  # Detailed description of the approach can be found in the [Article](https://medium.com/@bggghffff116/spark-integration-tests-with-testcontcontainers-7b925a8175f3)
+
 
 
