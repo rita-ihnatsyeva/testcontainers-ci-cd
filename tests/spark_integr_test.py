@@ -7,13 +7,11 @@ FIXTURES = Path(__file__).parent.parent.joinpath("docker_compose")
 
 
 def test_compose():
-    """stream-of-consciousness e2e test"""
     basic = DockerCompose(context=str(FIXTURES))
-
     basic.wait = False
 
     try:
-        # starting docker containers for spark stack
+        # starting docker containers for spark-minio-nessie stack
         basic.start()
         print(basic.get_container('spark').State)
 
