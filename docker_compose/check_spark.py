@@ -17,10 +17,6 @@ s3_resource = boto3.resource('s3',
     aws_secret_access_key=os.getenv('MINIO_SERVER_SECRET_KEY')
 )
 
-for bucket in s3_resource.buckets.all():
-    logging.info(f"bucket found {bucket.name}")
-
-
 spark = init_spark()
 
 # read csv from minio bucket

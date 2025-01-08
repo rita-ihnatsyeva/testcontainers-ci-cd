@@ -6,6 +6,4 @@ echo "installing boto3 and pyspark";
 pip install boto3;
 pip install pyspark;
 
-echo "start check spark";
-
-#python check_spark.py;
+echo "can start check spark";
