@@ -32,6 +32,6 @@ jobs:
           docker-compose --version
         continue-on-error: false
 
-      - name: Run integration test Spark-Nessie-Iceberg
+      - name: Run integration test Spark-Nessie-Iceberg-Minio
         run: |
           pytest ${{ github.workspace }}/tests/spark_integr_test.py
